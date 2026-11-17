@@ -4,7 +4,7 @@ The product under test is this Next.js editor template. `promo/` demo applicatio
 
 ## Run it
 
-Requires Node.js >=22.12, Bun 1.3.9 and installed Google Chrome. App runtime itself supports Node >=20.9. Tester Army is pinned to `e2e@0.16.0`, `@e2e-dev/web@0.11.2`, `playwright@1.63.0`. No `agent.*` steps or model credentials are used in this deterministic suite.
+Requires Node.js `^22.22.3 || >=24.8.0`, Bun 1.3.9 and installed Google Chrome. App runtime itself supports Node >=20.9. Tester Army is pinned to `e2e@0.23.1`, `@e2e-dev/web@0.16.0`, `playwright@1.63.0`. No `agent.*` steps or model credentials are used in this deterministic suite.
 
 ```bash
 bun install --frozen-lockfile
@@ -44,11 +44,12 @@ The default `.e2e/` output contains:
 
 - `report.json`: selected tests, status, steps, errors, counts and artifact links.
 - `summary.md` and `junit.xml`: readable and CI summaries.
-- `artifacts/`: real exported ZIP downloads, failure screenshots and retained failure traces.
+- `results/<test>/`: each test's `trace.md` (kept on failure) and an `attempt-<n>/` directory with its real exported ZIP downloads and failure screenshots.
+- `artifacts/`: the regression harnesses' own screenshots and downloads.
 - `logs/app.log`, `logs/{api-bug-bash,ui-bug-bash,bug-bash}.log`: application and individual regression group output.
 - `evidence/red/report.json`: the initial failing native run proving the undo regression. Only its report and summary were retained; its original screenshots/traces were superseded by later runs.
 
-Use the default output directory for this suite's ZIP-content checks; the published download fixture returns an attempt-relative path, so the ZIP helper finds that path beneath `.e2e/artifacts` without assuming runner-generated test IDs. CI uploads the output directory on success and failure and runs dev and production with Chrome. Dependencies install with the frozen Bun lockfile.
+The ZIP-content checks read each file from the `absolutePath` that `browser.waitForDownload` returns, so they do not depend on the output directory's layout. CI uploads the output directory on success and failure and runs dev and production with Chrome. Dependencies install with the frozen Bun lockfile.
 
 ## Flow matrix
 

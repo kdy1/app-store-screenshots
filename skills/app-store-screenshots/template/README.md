@@ -203,7 +203,7 @@ The `/screenshots/uploaded/[filename]` and `/fonts/imported/[filename]` routes s
 
 ## Automated verification
 
-The scaffold includes [Tester Army](https://github.com/tester-army/e2e), pinned to `e2e@0.16.0`, `@e2e-dev/web@0.11.2` and `playwright@1.63.0`. Tests require Node.js 22.12 or newer and installed **Google Chrome**. No model account or API key is needed for the deterministic suite.
+The scaffold includes [Tester Army](https://github.com/tester-army/e2e), pinned to `e2e@0.23.1`, `@e2e-dev/web@0.16.0` and `playwright@1.63.0`. Tests require Node.js 22.22.3 or newer on Node 22, or 24.8.0 or newer, and installed **Google Chrome**. No model account or API key is needed for the deterministic suite.
 
 ```bash
 bun install --frozen-lockfile
